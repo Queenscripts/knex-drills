@@ -1,10 +1,14 @@
 require('dotenv').config()
 const knex = require('knex')
+const ArticlesService = require('./articles-service')
+
 const knexInstance = knex({
-    client: 'pg',
-   connection: process.env.DB_URL
+  client: 'pg',
+  connection: process.env.DB_URL
   })
 require('dotenv').config()
+
+console.log(ArticlesService.getAllArticles())
 
 //DRILL 1
 // function searchByName(searchTerm) {
@@ -69,7 +73,7 @@ require('dotenv').config()
       knexInstance  
         .select('category')
         .sum('price as total')
-        .from ('shopping-list')
+        .from ('shopping_list')
         .groupBy('category')
         .then(result => {
             console.log(result)
